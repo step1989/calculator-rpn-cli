@@ -41,18 +41,20 @@ export default class TokenBuilder {
     const expressionWithoutSpace = expression.split('').filter((symbol) => symbol !== ' ');
     const tokens = [];
     let buffer = [];
-    let currentType = null;
     expressionWithoutSpace.forEach((el) => {
       if (this.NUMBERS.includes(el)) {
         buffer.push(el);
       } else if (this.OPERATORS.includes(el)) {
         if (buffer.length !== 0) {
-          const token = new NumberToken('number', Number(buffer.join('')));
+          const type = 'number';
+          const token = new NumberToken(type, Number(buffer.join('')));
           tokens.push(token);
           buffer = [];
         }
         const type = this.OPERATORS_TYPE[el];
-        const token = new OperatorToken(type, el, this.BINDINGPOWER[el], this.MATHFUNC[el]);
+        const bindingPower = this.BINDINGPOWER[el];
+        const mathFunc = this.MATHFUNC[el];
+        const token = new OperatorToken(type, el, bindingPower, mathFunc);
         tokens.push(token);
       }
     });

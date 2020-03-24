@@ -1,4 +1,4 @@
-import TokenBuilder from '../src/model/lexal/TokenBuilder';
+import TokenBuilder from '../src/lexal/TokenBuilder';
 
 
 test('input operator and number, get operator and number type tokens', () => {
