@@ -31,7 +31,6 @@ test('Input tokens(1+2*3) in infix notation, get tokens("123*+") in postfix nota
   ];
   const translator = new Translator(tokens);
   const received = translator.translateToPostfixNotation();
-  console.log(received);
   const expected = [
     { type: 'number', value: 1 },
     { type: 'number', value: 2 },
@@ -54,7 +53,6 @@ test('Input tokens(1*2+3) in infix notation, get tokens("12*3+") in postfix nota
   ];
   const translator = new Translator(tokens);
   const received = translator.translateToPostfixNotation();
-  console.log(received);
   const expected = [
     { type: 'number', value: 1 },
     { type: 'number', value: 2 },
@@ -65,6 +63,7 @@ test('Input tokens(1*2+3) in infix notation, get tokens("12*3+") in postfix nota
   expect(JSON.stringify(received)).toEqual(JSON.stringify(expected));
 });
 
+// '(1*2+3)+4'
 test('Input tokens("(1*2+3)+4") in infix notation, get tokens("12*3+4+") in postfix notation', () => {
   const sum = (a, b) => a + b;
   const div = (a, b) => a * b;
@@ -75,13 +74,12 @@ test('Input tokens("(1*2+3)+4") in infix notation, get tokens("12*3+4+") in post
     new NumberToken('number', 2),
     new OperatorToken('operator', '+', 1, sum),
     new NumberToken('number', 3),
-    new OperatorToken('closeBracket', ')', 0, null),
+    new OperatorToken('closedBracket', ')', 0, null),
     new OperatorToken('operator', '+', 1, sum),
     new NumberToken('number', 4),
   ];
   const translator = new Translator(tokens);
   const received = translator.translateToPostfixNotation();
-  console.log(received);
   const expected = [
     { type: 'number', value: 1 },
     { type: 'number', value: 2 },

@@ -7,4 +7,8 @@ export default class AbstractToken {
   getType() {
     return this.type;
   }
+
+  getValue() {
+    return this.value;
+  }
 }

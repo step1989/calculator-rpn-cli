@@ -32,22 +32,20 @@ export default class Translator {
     if (token.getType() === 'closedBracket') {
       let tokenTopOperationStack = this.getTokenTopStack();
       while (tokenTopOperationStack.getType() !== 'openBracket') {
-        this.outputQueue.push(tokenTopOperationStack);
-        this.operationsStack = this.operationsStack.slice(this.operationsStack.length);
+        this.outputQueue.push(this.operationsStack.pop());
         if (this.outputOperationsStackIsEmpty()) {
           throw new Error('Пропущенна закрывающая скобка');
         }
         tokenTopOperationStack = this.getTokenTopStack();
       }
       // если найдена открытая скобка, выбрасываем её
-      this.operationsStack = this.operationsStack.slice(this.operationsStack.length);
+      this.operationsStack.pop();
     }
     if (token.getType() === 'operator') {
       if (!this.outputOperationsStackIsEmpty()) {
         let tokenTopOperationStack = this.getTokenTopStack();
         while (tokenTopOperationStack.getBindingPower() >= token.getBindingPower()) {
-          this.outputQueue.push(tokenTopOperationStack);
-          this.operationsStack = this.operationsStack.slice(this.operationsStack.length);
+          this.outputQueue.push(this.operationsStack.pop());
           if (this.outputOperationsStackIsEmpty()) {
             break;
           }

@@ -10,4 +10,8 @@ export default class OperatorToken extends AbstractToken {
   getBindingPower() {
     return this.bindingPower;
   }
+
+  getMathFunc() {
+    return this.mathFunc;
+  }
 }
