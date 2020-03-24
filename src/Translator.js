@@ -30,27 +30,30 @@ export default class Translator {
       this.operationsStack.push(token);
     }
     if (token.getType() === 'closedBracket') {
-      let tokenTopOperationStack = this.getTokenTopStack();
-      while (tokenTopOperationStack.getType() !== 'openBracket') {
-        this.outputQueue.push(this.operationsStack.pop());
+      let headToken = this.operationsStack.pop();
+      while (headToken.getType() !== 'openBracket') {
+        this.outputQueue.push(headToken);
         if (this.outputOperationsStackIsEmpty()) {
           throw new Error('Пропущенна закрывающая скобка');
         }
-        tokenTopOperationStack = this.getTokenTopStack();
+        headToken = this.operationsStack.pop();
+        // если найдена открытая скобка, выбрасываем её
       }
-      // если найдена открытая скобка, выбрасываем её
-      this.operationsStack.pop();
     }
     if (token.getType() === 'operator') {
       if (!this.outputOperationsStackIsEmpty()) {
-        let tokenTopOperationStack = this.getTokenTopStack();
-        while (tokenTopOperationStack.getBindingPower() >= token.getBindingPower()) {
+        let headToken = this.getTokenTopStack();
+        // let headToken = this.operationsStack.pop();
+        while (headToken.getBindingPower() >= token.getBindingPower()) {
           this.outputQueue.push(this.operationsStack.pop());
+          // this.outputQueue.push(headToken);
           if (this.outputOperationsStackIsEmpty()) {
             break;
           }
-          tokenTopOperationStack = this.getTokenTopStack();
+          headToken = this.getTokenTopStack();
+          // headToken = this.operationsStack.pop();
         }
+        // this.operationsStack.push(headToken);
       }
       this.operationsStack.push(token);
     }

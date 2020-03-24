@@ -1,29 +1,19 @@
 import Calculator from "../src/Calculator";
 
-test('calculate one operation expression', () => {
-  const expression = '1+ 2';
-  const received = new Calculator(expression).calculate();
-  const expected = 3;
-  expect(received).toEqual(expected);
-});
+const testData = [
+  ['3', 3, 'simple test'],
+  ['1+2-3', 0, 'two operation'],
+  ['6 - 3 + 2 * 4', 11, 'binding power'],
+  ['12/2-6+2*2', 4, 'binding power 2'],
+  ['((1 + 2)/3) - 4', -3, 'brackets 1'],
+  ['( 1+ 2) / 3 + 4 ', 5, 'brackets 2'],
+  ['2*(1+1) ', 4, 'brackets 3'],
+  ['( 11+ 2.33) / 3.3 + 3 ', 7.04, 'float expression'],
+];
 
-test('Input tokens(1+2*3) in infix notation, get tokens("123*+") in postfix notation', () => {
-  const expression = '1+2*3';
-  const received = new Calculator(expression).calculate();
-  const expected = 7;
-  expect(received).toEqual(expected);
-});
-
-test('Input tokens(1*2+3) in infix notation, get tokens("12*3+") in postfix notation', () => {
-  const expression = '1*2+3';
-  const received = new Calculator(expression).calculate();
-  const expected = 5;
-  expect(received).toEqual(expected);
-});
-
-test('Input tokens("(1*2+3)+4") in infix notation, get tokens("12*3+4+") in postfix notation', () => {
-  const expression = '(1*2+3)+4';
-  const received = new Calculator(expression).calculate();
-  const expected = 9;
-  expect(received).toEqual(expected);
+describe.each(testData)('test expression', (expression, expected, description) => {
+  test(`${description}`, () => {
+    const received = new Calculator(expression).calculate();
+    expect(received).toEqual(expected);
+  });
 });

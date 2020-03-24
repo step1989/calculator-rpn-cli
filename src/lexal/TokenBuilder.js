@@ -4,8 +4,6 @@ import OperatorToken from "./OperatorToken";
 export default class TokenBuilder {
   static NUMBERS = '0123456789.';
 
-  static BRACKETS = '()';
-
   static OPERATORS = '+-*/()';
 
   static LETTERALS = '';
