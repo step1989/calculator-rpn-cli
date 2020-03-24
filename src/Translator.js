@@ -13,13 +13,13 @@ export default class Translator {
     return this.outputQueue;
   }
 
-  outputOperationsStackIsEmpty() {
+  operataionStackIsEmpty() {
     return this.operationsStack.length === 0;
   }
 
   getTokenTopStack() {
-    const operationStackTopIndex = this.operationsStack.length - 1;
-    return this.operationsStack[operationStackTopIndex];
+    const headOperationIndex = this.operationsStack.length - 1;
+    return this.operationsStack[headOperationIndex];
   }
 
   processedToken(token) {
@@ -33,7 +33,7 @@ export default class Translator {
       let headToken = this.operationsStack.pop();
       while (headToken.getType() !== 'openBracket') {
         this.outputQueue.push(headToken);
-        if (this.outputOperationsStackIsEmpty()) {
+        if (this.operataionStackIsEmpty()) {
           throw new Error('Пропущенна закрывающая скобка');
         }
         headToken = this.operationsStack.pop();
@@ -41,11 +41,11 @@ export default class Translator {
       }
     }
     if (token.getType() === 'operator') {
-      if (!this.outputOperationsStackIsEmpty()) {
+      if (!this.operataionStackIsEmpty()) {
         let headToken = this.getTokenTopStack();
         while (headToken.getBindingPower() >= token.getBindingPower()) {
           this.outputQueue.push(this.operationsStack.pop());
-          if (this.outputOperationsStackIsEmpty()) {
+          if (this.operataionStackIsEmpty()) {
             break;
           }
           headToken = this.getTokenTopStack();
