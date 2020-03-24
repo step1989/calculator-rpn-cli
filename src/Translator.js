@@ -37,23 +37,19 @@ export default class Translator {
           throw new Error('Пропущенна закрывающая скобка');
         }
         headToken = this.operationsStack.pop();
-        // если найдена открытая скобка, выбрасываем её
+        // найденная открытая скобка будет выброшена из стека операций
       }
     }
     if (token.getType() === 'operator') {
       if (!this.outputOperationsStackIsEmpty()) {
         let headToken = this.getTokenTopStack();
-        // let headToken = this.operationsStack.pop();
         while (headToken.getBindingPower() >= token.getBindingPower()) {
           this.outputQueue.push(this.operationsStack.pop());
-          // this.outputQueue.push(headToken);
           if (this.outputOperationsStackIsEmpty()) {
             break;
           }
           headToken = this.getTokenTopStack();
-          // headToken = this.operationsStack.pop();
         }
-        // this.operationsStack.push(headToken);
       }
       this.operationsStack.push(token);
     }

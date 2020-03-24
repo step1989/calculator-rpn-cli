@@ -1,5 +1,5 @@
-import NumberToken from "./NumberToken";
-import OperatorToken from "./OperatorToken";
+import NumberToken from './NumberToken';
+import OperatorToken from './OperatorToken';
 
 export default class TokenBuilder {
   static NUMBERS = '0123456789.';

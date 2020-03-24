@@ -1,5 +1,5 @@
-import TokenBuilder from "./lexal/TokenBuilder";
-import Translator from "./Translator";
+import TokenBuilder from './lexal/TokenBuilder';
+import Translator from './Translator';
 
 export default class Calculator {
   constructor(expression) {
@@ -26,6 +26,6 @@ export default class Calculator {
     const tokensInPostfixNotation = new Translator(tokens).translateToPostfixNotation();
     this.processedToken(tokensInPostfixNotation);
     const [result] = this.stack;
-    return result;
+    return parseFloat(result.toFixed(2));
   }
 }

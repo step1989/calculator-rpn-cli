@@ -1,4 +1,4 @@
-import AbstractToken from "./AbstractToken";
+import AbstractToken from './AbstractToken';
 
 export default class OperatorToken extends AbstractToken {
   constructor(type, value, bindingPower, mathFunc) {

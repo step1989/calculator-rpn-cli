@@ -28,11 +28,15 @@ test('input operator, number and bracket, get operator, number, bracket type tok
   const expression = '(5 + 3) - 1';
   const received = TokenBuilder.getTokens(expression);
   const expected = [
-    { type: 'openBracket', value: '(', bindingPower: 0, mathFunc: null },
+    {
+      type: 'openBracket', value: '(', bindingPower: 0, mathFunc: null,
+    },
     { type: 'number', value: 5 },
     { type: 'operator', value: '+', bindingPower: 1 },
     { type: 'number', value: 3 },
-    { type: 'closedBracket', value: ')', bindingPower: 0, mathFunc: null },
+    {
+      type: 'closedBracket', value: ')', bindingPower: 0, mathFunc: null,
+    },
     { type: 'operator', value: '-', bindingPower: 1 },
     { type: 'number', value: 1 },
   ];

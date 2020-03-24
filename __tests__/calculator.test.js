@@ -1,4 +1,4 @@
-import Calculator from "../src/Calculator";
+import Calculator from '../src/Calculator';
 
 const testData = [
   ['3', 3, 'simple test'],
