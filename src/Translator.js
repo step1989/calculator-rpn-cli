@@ -5,6 +5,14 @@ export default class Translator {
     this.operationsStack = [];
   }
 
+  translateToPostfixNotation() {
+    this.tokens.forEach((token) => this.processedToken(token));
+    this.operationsStack.reverse().forEach((operationToken) => {
+      this.outputQueue.push(operationToken);
+    });
+    return this.outputQueue;
+  }
+
   outputOperationsStackIsEmpty() {
     return this.operationsStack.length === 0;
   }
@@ -17,6 +25,22 @@ export default class Translator {
   processedToken(token) {
     if (token.getType() === 'number') {
       this.outputQueue.push(token);
+    }
+    if (token.getType() === 'openBracket') {
+      this.operationsStack.push(token);
+    }
+    if (token.getType() === 'closedBracket') {
+      let tokenTopOperationStack = this.getTokenTopStack();
+      while (tokenTopOperationStack.getType() !== 'openBracket') {
+        this.outputQueue.push(tokenTopOperationStack);
+        this.operationsStack = this.operationsStack.slice(this.operationsStack.length);
+        if (this.outputOperationsStackIsEmpty()) {
+          throw new Error('Пропущенна закрывающая скобка');
+        }
+        tokenTopOperationStack = this.getTokenTopStack();
+      }
+      // если найдена открытая скобка, выбрасываем её
+      this.operationsStack = this.operationsStack.slice(this.operationsStack.length);
     }
     if (token.getType() === 'operator') {
       if (!this.outputOperationsStackIsEmpty()) {
@@ -32,13 +56,5 @@ export default class Translator {
       }
       this.operationsStack.push(token);
     }
-  }
-
-  translateToPostfixNotation() {
-    this.tokens.forEach((token) => this.processedToken(token));
-    this.operationsStack.reverse().forEach((operationToken) => {
-      this.outputQueue.push(operationToken);
-    });
-    return this.outputQueue;
   }
 }
