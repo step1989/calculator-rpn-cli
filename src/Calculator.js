@@ -9,22 +9,7 @@ export default class Calculator {
 
   processedToken(tokens) {
     tokens.forEach((token) => {
-      if (token.getType() === 'number') {
-        this.stack.push(token.getValue());
-      }
-      if (token.getType() === 'operator') {
-        const countOfArguments = token.getCountArguments();
-        if (countOfArguments === 2) {
-          const b = this.stack.pop();
-          const a = this.stack.pop();
-          const func = token.getMathFunc();
-          this.stack.push(func(a, b));
-        } else if (countOfArguments === 1) {
-          const a = this.stack.pop();
-          const func = token.getMathFunc();
-          this.stack.push(func(a));
-        }
-      }
+      token.calculation(this.stack);
     });
   }
 

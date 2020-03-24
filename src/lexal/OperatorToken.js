@@ -19,4 +19,18 @@ export default class OperatorToken extends AbstractToken {
   getCountArguments() {
     return this.countArguments;
   }
+
+  calculation(stack) {
+    const countOfArguments = this.getCountArguments();
+    if (countOfArguments === 2) {
+      const b = stack.pop();
+      const a = stack.pop();
+      const func = this.getMathFunc();
+      stack.push(func(a, b));
+    } else if (countOfArguments === 1) {
+      const a = stack.pop();
+      const func = this.getMathFunc();
+      this.stack.push(func(a));
+    }
+  }
 }
