@@ -1,7 +1,7 @@
 export default class AbstractToken {
-  constructor(type, value) {
+  constructor(type) {
     this.type = type;
-    this.value = value;
+    // this.value = value;
   }
 
   getType() {

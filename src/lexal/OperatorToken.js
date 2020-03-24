@@ -1,8 +1,8 @@
 import AbstractToken from './AbstractToken';
 
 export default class OperatorToken extends AbstractToken {
-  constructor(type, value, bindingPower, mathFunc, countArguments) {
-    super(type, value);
+  constructor(type, bindingPower, mathFunc, countArguments) {
+    super(type);
     this.bindingPower = bindingPower;
     this.mathFunc = mathFunc;
     this.countArguments = countArguments;

@@ -62,7 +62,7 @@ export default class TokenBuilder {
         const bindingPower = this.BINDING_POWER[el];
         const mathFunc = this.MATHFUNC[el];
         const countOfArguments = this.COUNT_OF_ARGUMENTS_TO_СALCULATE[el];
-        const token = new OperatorToken(type, el, bindingPower, mathFunc, countOfArguments);
+        const token = new OperatorToken(type, bindingPower, mathFunc, countOfArguments);
         tokens.push(token);
       }
     });

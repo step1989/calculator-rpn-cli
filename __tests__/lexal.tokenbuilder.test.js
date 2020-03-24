@@ -5,26 +5,26 @@ test('check all tokens', () => {
   const received = TokenBuilder.getTokens(expression);
   const expected = [
     {
-      type: 'openBracket', value: '(', bindingPower: 0, mathFunc: null, countArguments: null,
+      type: 'openBracket', bindingPower: 0, mathFunc: null, countArguments: null,
     },
     { type: 'number', value: 5 },
     {
-      type: 'operator', value: '+', bindingPower: 1, countArguments: 2,
+      type: 'operator', bindingPower: 1, countArguments: 2,
     },
     { type: 'number', value: 3 },
     {
-      type: 'closedBracket', value: ')', bindingPower: 0, mathFunc: null, countArguments: null,
+      type: 'closedBracket', bindingPower: 0, mathFunc: null, countArguments: null,
     },
     {
-      type: 'operator', value: '-', bindingPower: 1, countArguments: 2,
+      type: 'operator', bindingPower: 1, countArguments: 2,
     },
     { type: 'number', value: 122 },
     {
-      type: 'operator', value: '*', bindingPower: 2, countArguments: 2,
+      type: 'operator', bindingPower: 2, countArguments: 2,
     },
     { type: 'number', value: 33.34 },
     {
-      type: 'operator', value: '/', bindingPower: 2, countArguments: 2,
+      type: 'operator', bindingPower: 2, countArguments: 2,
     },
     { type: 'number', value: 3 },
   ];
