@@ -13,10 +13,17 @@ export default class Calculator {
         this.stack.push(token.getValue());
       }
       if (token.getType() === 'operator') {
-        const b = this.stack.pop();
-        const a = this.stack.pop();
-        const func = token.getMathFunc();
-        this.stack.push(func(a, b));
+        const countOfArguments = token.getCountArguments();
+        if (countOfArguments === 2) {
+          const b = this.stack.pop();
+          const a = this.stack.pop();
+          const func = token.getMathFunc();
+          this.stack.push(func(a, b));
+        } else if (countOfArguments === 1) {
+          const a = this.stack.pop();
+          const func = token.getMathFunc();
+          this.stack.push(func(a));
+        }
       }
     });
   }

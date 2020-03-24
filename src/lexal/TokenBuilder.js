@@ -17,7 +17,7 @@ export default class TokenBuilder {
     ')': 'closedBracket',
   };
 
-  static BINDINGPOWER = {
+  static BINDING_POWER = {
     '+': 1,
     '-': 1,
     '*': 2,
@@ -35,6 +35,15 @@ export default class TokenBuilder {
     ')': null,
   };
 
+  static COUNT_OF_ARGUMENTS_TO_СALCULATE = {
+    '+': 2,
+    '-': 2,
+    '*': 2,
+    '/': 2,
+    '(': null,
+    ')': null,
+  }
+
   static getTokens(expression) {
     const expressionWithoutSpace = expression.split('').filter((symbol) => symbol !== ' ');
     const tokens = [];
@@ -50,9 +59,10 @@ export default class TokenBuilder {
           buffer = [];
         }
         const type = this.OPERATORS_TYPE[el];
-        const bindingPower = this.BINDINGPOWER[el];
+        const bindingPower = this.BINDING_POWER[el];
         const mathFunc = this.MATHFUNC[el];
-        const token = new OperatorToken(type, el, bindingPower, mathFunc);
+        const countOfArguments = this.COUNT_OF_ARGUMENTS_TO_СALCULATE[el];
+        const token = new OperatorToken(type, el, bindingPower, mathFunc, countOfArguments);
         tokens.push(token);
       }
     });
