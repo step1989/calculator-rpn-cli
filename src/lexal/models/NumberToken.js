@@ -9,4 +9,10 @@ export default class NumberToken extends AbstractToken {
   calculation(stack) {
     stack.push(this.value);
   }
+
+
+  processedTokenToPostfixNotation(args) {
+    const [outputQueue] = args;
+    outputQueue.push(this);
+  }
 }

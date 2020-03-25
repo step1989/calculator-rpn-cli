@@ -5,7 +5,7 @@ test('check all tokens', () => {
   const received = TokenBuilder.getTokens(expression);
   const expected = [
     {
-      type: 'openBracket', bindingPower: 0, mathFunc: null, countArguments: null,
+      type: 'openBracket', bindingPower: 0, countArguments: null,
     },
     { type: 'number', value: 5 },
     {
@@ -13,7 +13,7 @@ test('check all tokens', () => {
     },
     { type: 'number', value: 3 },
     {
-      type: 'closedBracket', bindingPower: 0, mathFunc: null, countArguments: null,
+      type: 'closedBracket', bindingPower: 0, countArguments: null,
     },
     {
       type: 'operator', bindingPower: 1, countArguments: 2,

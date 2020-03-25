@@ -1,5 +1,10 @@
-import NumberToken from './NumberToken';
-import OperatorToken from './OperatorToken';
+import NumberToken from './models/NumberToken';
+import AdditionToken from './models/operators/AdditionToken';
+import SubtractionToken from './models/operators/SubtractionToken';
+import MultiplicationToken from './models/operators/MultiplicationToken';
+import DivisionToken from './models/operators/DivisionToken';
+import OpenBracketToken from './models/operators/OpenBracketToken';
+import ClosedBracketToken from './models/operators/ClosedBracketToken';
 
 export default class TokenBuilder {
   static NUMBERS = '0123456789.';
@@ -8,41 +13,15 @@ export default class TokenBuilder {
 
   static LETTERALS = '';
 
+
   static OPERATORS_TYPE = {
-    '+': 'operator',
-    '-': 'operator',
-    '*': 'operator',
-    '/': 'operator',
-    '(': 'openBracket',
-    ')': 'closedBracket',
+    '+': new AdditionToken('operator'),
+    '-': new SubtractionToken('operator'),
+    '*': new MultiplicationToken('operator'),
+    '/': new DivisionToken('operator'),
+    '(': new OpenBracketToken('openBracket'),
+    ')': new ClosedBracketToken('closedBracket'),
   };
-
-  static BINDING_POWER = {
-    '+': 1,
-    '-': 1,
-    '*': 2,
-    '/': 2,
-    '(': 0,
-    ')': 0,
-  };
-
-  static MATHFUNC = {
-    '+': (a, b) => a + b,
-    '-': (a, b) => a - b,
-    '*': (a, b) => a * b,
-    '/': (a, b) => a / b,
-    '(': null,
-    ')': null,
-  };
-
-  static COUNT_OF_ARGUMENTS_TO_СALCULATE = {
-    '+': 2,
-    '-': 2,
-    '*': 2,
-    '/': 2,
-    '(': null,
-    ')': null,
-  }
 
   static getTokens(expression) {
     const expressionWithoutSpace = expression.split('').filter((symbol) => symbol !== ' ');
@@ -58,11 +37,7 @@ export default class TokenBuilder {
           tokens.push(token);
           buffer = [];
         }
-        const type = this.OPERATORS_TYPE[el];
-        const bindingPower = this.BINDING_POWER[el];
-        const mathFunc = this.MATHFUNC[el];
-        const countOfArguments = this.COUNT_OF_ARGUMENTS_TO_СALCULATE[el];
-        const token = new OperatorToken(type, bindingPower, mathFunc, countOfArguments);
+        const token = this.OPERATORS_TYPE[el];
         tokens.push(token);
       }
     });
