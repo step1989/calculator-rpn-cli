@@ -15,12 +15,12 @@ export default class TokenBuilder {
 
 
   static OPERATORS_TYPE = {
-    '+': new AdditionToken('operator'),
-    '-': new SubtractionToken('operator'),
-    '*': new MultiplicationToken('operator'),
-    '/': new DivisionToken('operator'),
-    '(': new OpenBracketToken('openBracket'),
-    ')': new ClosedBracketToken('closedBracket'),
+    '+': new AdditionToken(),
+    '-': new SubtractionToken(),
+    '*': new MultiplicationToken(),
+    '/': new DivisionToken(),
+    '(': new OpenBracketToken(),
+    ')': new ClosedBracketToken(),
   };
 
   static getTokens(expression) {
@@ -32,8 +32,8 @@ export default class TokenBuilder {
         buffer.push(el);
       } else if (this.OPERATORS.includes(el)) {
         if (buffer.length !== 0) {
-          const type = 'number';
-          const token = new NumberToken(type, Number(buffer.join('')));
+          const value = Number(buffer.join(''));
+          const token = new NumberToken(value);
           tokens.push(token);
           buffer = [];
         }
@@ -42,9 +42,11 @@ export default class TokenBuilder {
       }
     });
     if (buffer.length !== 0) {
-      const token = new NumberToken('number', Number(buffer.join('')));
+      const value = Number(buffer.join(''));
+      const token = new NumberToken(value);
       tokens.push(token);
     }
+    console.log(tokens);
     return tokens;
   }
 }

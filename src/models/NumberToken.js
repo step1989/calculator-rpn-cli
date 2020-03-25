@@ -1,15 +1,18 @@
 import AbstractToken from './AbstractToken';
 
 export default class NumberToken extends AbstractToken {
-  constructor(type, value) {
-    super(type);
+  constructor(value) {
+    super();
     this.value = value;
   }
 
-  calculate(stack) {
-    stack.push(this.value);
+  getValue() {
+    return this.value;
   }
 
+  calculate(stack) {
+    stack.push(this.getValue());
+  }
 
   processedTokenToPostfixNotation(args) {
     const [outputQueue] = args;

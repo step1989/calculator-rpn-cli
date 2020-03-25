@@ -1,6 +1,7 @@
 /* eslint class-methods-use-this:
 ["error", { "exceptMethods": ["processedTokenToPostfixNotation"] }] */
 import OperatorToken from '../OperatorToken';
+import OpenBracketToken from './OpenBracketToken';
 
 export default class ClosedBracketToken extends OperatorToken {
   constructor(type) {
@@ -11,10 +12,10 @@ export default class ClosedBracketToken extends OperatorToken {
   processedTokenToPostfixNotation(args) {
     const [outputQueue, operationsStack] = args;
     let headToken = operationsStack.pop();
-    while (headToken.getType() !== 'openBracket') {
+    while (!(headToken instanceof OpenBracketToken)) {
       outputQueue.push(headToken);
       if (operationsStack.length === 0) {
-        throw new Error('Пропущенна закрывающая скобка');
+        throw new Error('Пропущена закрывающая скобка');
       }
       headToken = operationsStack.pop();
       // найденная открытая скобка будет выброшена из стека операций
