@@ -1,7 +1,7 @@
 import OperationsMapper from './OperationsMapper';
-import NumberReposytory from './NumberReposytory';
 import FunctionsMapper from './FunctionsMapper';
 import Character from './Character';
+import NumberToken from './models/NumberToken';
 
 export default class TokenBuilder {
   constructor(expression) {
@@ -10,7 +10,7 @@ export default class TokenBuilder {
     this.buffer = [];
     this.flagType = null;
     this.mapper = {
-      numbers: (value) => NumberReposytory.getToken(value),
+      numbers: (value) => new NumberToken(value),
       letterals: (value) => FunctionsMapper.getToken(value),
     };
   }
