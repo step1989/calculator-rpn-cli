@@ -8,7 +8,8 @@ export default class Calculator {
   }
 
   calculate() {
-    const tokens = TokenBuilder.getTokens(this.expression);
+    const tokenBuilder = new TokenBuilder(this.expression);
+    const tokens = tokenBuilder.getTokens();
     const translator = new Translator(tokens);
     const tokensInPostfixNotation = translator.translateTokensToPostfixNotation();
     tokensInPostfixNotation.forEach((token) => {

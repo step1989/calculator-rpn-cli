@@ -1,52 +1,52 @@
-import NumberToken from './models/NumberToken';
-import AdditionToken from './models/operators/binary/AdditionToken';
-import SubtractionToken from './models/operators/binary/SubtractionToken';
-import MultiplicationToken from './models/operators/binary/MultiplicationToken';
-import DivisionToken from './models/operators/binary/DivisionToken';
-import OpenBracketToken from './models/operators/brackets/OpenBracketToken';
-import ClosedBracketToken from './models/operators/brackets/ClosedBracketToken';
+import OperationsRepository from './OperationsRepository';
+import NumberReposytory from './NumberReposytory';
+import FunctionReposytory from './FunctionReposytory';
 
 export default class TokenBuilder {
-  static NUMBERS = '0123456789.';
+  constructor(expression) {
+    this.expression = expression;
+    this.tokens = [];
+    this.buffer = [];
+    this.flagType = null;
+    this.mapper = {
+      number: (value) => NumberReposytory.getToken(value),
+      letterals: (value) => FunctionReposytory.getToken(value),
+    };
+  }
 
-  static OPERATORS = '+-*/()';
+  getValue() {
+    return this.flagType === 'number' ? Number(this.buffer.join('')) : this.buffer.join('');
+  }
 
-  static LETTERALS = '';
+  getToken(value) {
+    return this.mapper[this.flagType](value);
+  }
 
-
-  static OPERATORS_TYPE = {
-    '+': new AdditionToken(),
-    '-': new SubtractionToken(),
-    '*': new MultiplicationToken(),
-    '/': new DivisionToken(),
-    '(': new OpenBracketToken(),
-    ')': new ClosedBracketToken(),
-  };
-
-  static getTokens(expression) {
-    const expressionWithoutSpace = expression.split('').filter((symbol) => symbol !== ' ');
-    const tokens = [];
-    let buffer = [];
+  getTokens() {
+    const expressionWithoutSpace = this.expression.split('').filter((symbol) => symbol !== ' ');
     expressionWithoutSpace.forEach((el) => {
-      if (this.NUMBERS.includes(el)) {
-        buffer.push(el);
-      } else if (this.OPERATORS.includes(el)) {
-        if (buffer.length !== 0) {
-          const value = Number(buffer.join(''));
-          const token = new NumberToken(value);
-          tokens.push(token);
-          buffer = [];
+      if (NumberReposytory.isNumbers(el)) {
+        this.flagType = 'number';
+        this.buffer.push(el);
+      } else if (FunctionReposytory.isLettarls(el)) {
+        this.flagType = 'letterals';
+        this.buffer.push(el);
+      } else if (OperationsRepository.isOperator(el)) {
+        if (this.buffer.length !== 0) {
+          const value = this.getValue();
+          const token = this.getToken(value);
+          this.tokens.push(token);
+          this.buffer = [];
         }
-        const token = this.OPERATORS_TYPE[el];
-        tokens.push(token);
+        const token = OperationsRepository.getToken(el);
+        this.tokens.push(token);
       }
     });
-    if (buffer.length !== 0) {
-      const value = Number(buffer.join(''));
-      const token = new NumberToken(value);
-      tokens.push(token);
+    if (this.buffer.length !== 0) {
+      const value = this.getValue();
+      const token = this.getToken(value);
+      this.tokens.push(token);
     }
-    console.log(tokens);
-    return tokens;
+    return this.tokens;
   }
 }
