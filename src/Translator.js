@@ -9,9 +9,10 @@ export default class Translator {
     this.tokens.forEach((token) => {
       token.processedTokenToPostfixNotation([this.outputQueue, this.operationsStack]);
     });
-    this.operationsStack.reverse().forEach((operationToken) => {
-      this.outputQueue.push(operationToken);
-    });
+    while (this.operationsStack.length !== 0) {
+      const operation = this.operationsStack.pop();
+      this.outputQueue.push(operation);
+    }
     return this.outputQueue;
   }
 }
