@@ -15,6 +15,10 @@ export default class TokenBuilder {
     };
   }
 
+  bufferIsEmpty() {
+    return this.buffer.length === 0;
+  }
+
   getValue() {
     return this.flagType === 'numbers' ? Number(this.buffer.join('')) : this.buffer.join('');
   }
@@ -33,7 +37,7 @@ export default class TokenBuilder {
         this.flagType = 'letterals';
         this.buffer.push(el);
       } else if (Character.isOperator(el)) {
-        if (this.buffer.length !== 0) {
+        if (!this.bufferIsEmpty()) {
           const value = this.getValue();
           const token = this.getToken(value);
           this.tokens.push(token);
@@ -43,7 +47,7 @@ export default class TokenBuilder {
         this.tokens.push(token);
       }
     });
-    if (this.buffer.length !== 0) {
+    if (!this.bufferIsEmpty()) {
       const value = this.getValue();
       const token = this.getToken(value);
       this.tokens.push(token);
