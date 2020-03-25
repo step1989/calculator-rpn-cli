@@ -1,10 +1,9 @@
-import OperatorToken from './OperatorToken';
+import BinaryOperatorToken from './BinaryOperatorToken';
 
-export default class SubtractionToken extends OperatorToken {
+export default class SubtractionToken extends BinaryOperatorToken {
   constructor(type) {
     super(type);
     this.bindingPower = 1;
-    this.countArguments = 2;
     this.mathFunc = (a, b) => a - b;
   }
 

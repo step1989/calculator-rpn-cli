@@ -1,6 +1,6 @@
 /* eslint class-methods-use-this:
 ["error", { "exceptMethods": ["processedTokenToPostfixNotation"] }] */
-import OperatorToken from './OperatorToken';
+import OperatorToken from '../OperatorToken';
 
 export default class ClosedBracketToken extends OperatorToken {
   constructor(type) {

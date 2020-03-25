@@ -12,7 +12,7 @@ export default class Calculator {
     const translator = new Translator(tokens);
     const tokensInPostfixNotation = translator.translateTokensToPostfixNotation();
     tokensInPostfixNotation.forEach((token) => {
-      token.calculation(this.stack);
+      token.calculate(this.stack);
     });
     const [result] = this.stack;
     return parseFloat(result.toFixed(2));

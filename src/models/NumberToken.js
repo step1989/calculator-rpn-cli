@@ -6,7 +6,7 @@ export default class NumberToken extends AbstractToken {
     this.value = value;
   }
 
-  calculation(stack) {
+  calculate(stack) {
     stack.push(this.value);
   }
 

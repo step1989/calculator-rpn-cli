@@ -1,10 +1,9 @@
-import OperatorToken from './OperatorToken';
+import BinaryOperatorToken from './BinaryOperatorToken';
 
-export default class DivisionToken extends OperatorToken {
+export default class DivisionToken extends BinaryOperatorToken {
   constructor(type) {
     super(type);
     this.bindingPower = 2;
-    this.countArguments = 2;
     this.mathFunc = (a, b) => a / b;
   }
 

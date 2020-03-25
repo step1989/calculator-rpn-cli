@@ -1,10 +1,10 @@
 import NumberToken from './models/NumberToken';
-import AdditionToken from './models/operators/AdditionToken';
-import SubtractionToken from './models/operators/SubtractionToken';
-import MultiplicationToken from './models/operators/MultiplicationToken';
-import DivisionToken from './models/operators/DivisionToken';
-import OpenBracketToken from './models/operators/OpenBracketToken';
-import ClosedBracketToken from './models/operators/ClosedBracketToken';
+import AdditionToken from './models/operators/binary/AdditionToken';
+import SubtractionToken from './models/operators/binary/SubtractionToken';
+import MultiplicationToken from './models/operators/binary/MultiplicationToken';
+import DivisionToken from './models/operators/binary/DivisionToken';
+import OpenBracketToken from './models/operators/brackets/OpenBracketToken';
+import ClosedBracketToken from './models/operators/brackets/ClosedBracketToken';
 
 export default class TokenBuilder {
   static NUMBERS = '0123456789.';

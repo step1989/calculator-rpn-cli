@@ -1,4 +1,4 @@
-import OperatorToken from './OperatorToken';
+import OperatorToken from '../OperatorToken';
 
 export default class OpenBracketToken extends OperatorToken {
   constructor(type) {
