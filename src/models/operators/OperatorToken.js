@@ -11,11 +11,15 @@ export default class OperatorToken extends AbstractToken {
     return this.bindingPower;
   }
 
+  getCountArguments() {
+    return this.countArguments;
+  }
+
   processedTokenToPostfixNotation(args) {
     const [outputQueue, operationsStack] = args;
     if (operationsStack.length !== 0) {
       let headToken = operationsStack[operationsStack.length - 1];
-      while (headToken.getBindingPower() >= this.getBindingPower() && headToken.getType() !== 'openBracket') {
+      while (headToken.getBindingPower() >= this.getBindingPower()) {
         outputQueue.push(operationsStack.pop());
         if (operationsStack.length === 0) {
           break;
@@ -24,10 +28,6 @@ export default class OperatorToken extends AbstractToken {
       }
     }
     operationsStack.push(this);
-  }
-
-  getCountArguments() {
-    return this.countArguments;
   }
 
   calculation(stack) {
