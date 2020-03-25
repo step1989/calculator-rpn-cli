@@ -8,7 +8,7 @@ const testData = [
   ['((1 + 2)/3) - 4', -3, 'brackets 1'],
   ['( 1+ 2) / 3 + 4 ', 5, 'brackets 2'],
   ['2*(1+1) ', 4, 'brackets 3'],
-  ['( 11+ 2.33) / 3.3 + 3 ', 7.04, 'float expression'],
+  ['( 11+ 2.33) / 3.3 + 3 ', 7.03939393939394, 'float expression'],
 ];
 
 describe.each(testData)('test expression', (expression, expected, description) => {

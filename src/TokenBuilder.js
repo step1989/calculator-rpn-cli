@@ -1,6 +1,7 @@
-import OperationsRepository from './OperationsRepository';
+import OperationsMapper from './OperationsMapper';
 import NumberReposytory from './NumberReposytory';
-import FunctionReposytory from './FunctionReposytory';
+import FunctionsMapper from './FunctionsMapper';
+import Character from './Character';
 
 export default class TokenBuilder {
   constructor(expression) {
@@ -9,13 +10,13 @@ export default class TokenBuilder {
     this.buffer = [];
     this.flagType = null;
     this.mapper = {
-      number: (value) => NumberReposytory.getToken(value),
-      letterals: (value) => FunctionReposytory.getToken(value),
+      numbers: (value) => NumberReposytory.getToken(value),
+      letterals: (value) => FunctionsMapper.getToken(value),
     };
   }
 
   getValue() {
-    return this.flagType === 'number' ? Number(this.buffer.join('')) : this.buffer.join('');
+    return this.flagType === 'numbers' ? Number(this.buffer.join('')) : this.buffer.join('');
   }
 
   getToken(value) {
@@ -25,20 +26,20 @@ export default class TokenBuilder {
   getTokens() {
     const expressionWithoutSpace = this.expression.split('').filter((symbol) => symbol !== ' ');
     expressionWithoutSpace.forEach((el) => {
-      if (NumberReposytory.isNumbers(el)) {
-        this.flagType = 'number';
+      if (Character.isNumbers(el)) {
+        this.flagType = 'numbers';
         this.buffer.push(el);
-      } else if (FunctionReposytory.isLettarls(el)) {
+      } else if (Character.isLetters(el)) {
         this.flagType = 'letterals';
         this.buffer.push(el);
-      } else if (OperationsRepository.isOperator(el)) {
+      } else if (Character.isOperator(el)) {
         if (this.buffer.length !== 0) {
           const value = this.getValue();
           const token = this.getToken(value);
           this.tokens.push(token);
           this.buffer = [];
         }
-        const token = OperationsRepository.getToken(el);
+        const token = OperationsMapper.getToken(el);
         this.tokens.push(token);
       }
     });

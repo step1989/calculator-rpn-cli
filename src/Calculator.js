@@ -16,6 +16,6 @@ export default class Calculator {
       token.calculate(this.stack);
     });
     const [result] = this.stack;
-    return parseFloat(result.toFixed(2));
+    return parseFloat(result);
   }
 }

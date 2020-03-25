@@ -5,8 +5,8 @@ import DivisionToken from './models/operators/binary/DivisionToken';
 import OpenBracketToken from './models/operators/brackets/OpenBracketToken';
 import ClosedBracketToken from './models/operators/brackets/ClosedBracketToken';
 
-export default class OperationsRepository {
-  static OPERATORS_MAPPER = {
+export default class OperationsMapper {
+  static mapper = {
     '+': new AdditionToken(),
     '-': new SubtractionToken(),
     '*': new MultiplicationToken(),
@@ -15,11 +15,7 @@ export default class OperationsRepository {
     ')': new ClosedBracketToken(),
   };
 
-  static OPERATORS = '+-*/()';
-
-  static isOperator = (el) => this.OPERATORS.includes(el);
-
   static getToken(operation) {
-    return this.OPERATORS_MAPPER[operation];
+    return this.mapper[operation];
   }
 }
