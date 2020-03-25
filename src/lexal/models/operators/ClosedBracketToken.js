@@ -1,3 +1,5 @@
+/* eslint class-methods-use-this:
+["error", { "exceptMethods": ["processedTokenToPostfixNotation"] }] */
 import OperatorToken from './OperatorToken';
 
 export default class ClosedBracketToken extends OperatorToken {
@@ -17,6 +19,5 @@ export default class ClosedBracketToken extends OperatorToken {
       headToken = operationsStack.pop();
       // найденная открытая скобка будет выброшена из стека операций
     }
-    console.log(this); // иправить правило линтера
   }
 }
