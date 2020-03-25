@@ -7,16 +7,13 @@ export default class Calculator {
     this.stack = [];
   }
 
-  processedToken(tokens) {
-    tokens.forEach((token) => {
-      token.calculation(this.stack);
-    });
-  }
-
   calculate() {
     const tokens = TokenBuilder.getTokens(this.expression);
-    const tokensInPostfixNotation = new Translator(tokens).translateToPostfixNotation();
-    this.processedToken(tokensInPostfixNotation);
+    const translator = new Translator(tokens);
+    const tokensInPostfixNotation = translator.translateTokensToPostfixNotation();
+    tokensInPostfixNotation.forEach((token) => {
+      token.calculation(this.stack);
+    });
     const [result] = this.stack;
     return parseFloat(result.toFixed(2));
   }

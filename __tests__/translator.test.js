@@ -18,7 +18,7 @@ test('Input tokens("(1*2+3)+4") in infix notation, get tokens("12*3+4+") in post
     new NumberToken('number', 4),
   ];
   const translator = new Translator(tokens);
-  const received = translator.translateToPostfixNotation();
+  const received = translator.translateTokensToPostfixNotation();
   const expected = [
     { type: 'number', value: 1 },
     { type: 'number', value: 2 },

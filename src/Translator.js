@@ -5,7 +5,7 @@ export default class Translator {
     this.operationsStack = [];
   }
 
-  translateToPostfixNotation() {
+  translateTokensToPostfixNotation() {
     this.tokens.forEach((token) => {
       token.processedTokenToPostfixNotation([this.outputQueue, this.operationsStack]);
     });
