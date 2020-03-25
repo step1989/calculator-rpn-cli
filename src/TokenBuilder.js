@@ -11,7 +11,7 @@ export default class TokenBuilder {
     this.flagType = null;
     this.mapper = {
       numbers: (value) => new NumberToken(value),
-      letterals: (value) => FunctionsMapper.getToken(value),
+      letters: (value) => FunctionsMapper.getToken(value),
     };
   }
 
@@ -34,7 +34,7 @@ export default class TokenBuilder {
         this.flagType = 'numbers';
         this.buffer.push(el);
       } else if (Character.isLetters(el)) {
-        this.flagType = 'letterals';
+        this.flagType = 'letters';
         this.buffer.push(el);
       } else if (Character.isOperator(el)) {
         if (!this.bufferIsEmpty()) {
