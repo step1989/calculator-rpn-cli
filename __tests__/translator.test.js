@@ -1,18 +1,9 @@
-import NumberToken from '../src/lexal/models/NumberToken';
-import AdditionToken from '../src/lexal/models/operators/AdditionToken';
-import MultiplicationToken from '../src/lexal/models/operators/MultiplicationToken';
-import OpenBracketToken from '../src/lexal/models/operators/OpenBracketToken';
-import ClosedBracketToken from '../src/lexal/models/operators/ClosedBracketToken';
+import NumberToken from '../src/models/NumberToken';
+import AdditionToken from '../src/models/operators/AdditionToken';
+import MultiplicationToken from '../src/models/operators/MultiplicationToken';
+import OpenBracketToken from '../src/models/operators/OpenBracketToken';
+import ClosedBracketToken from '../src/models/operators/ClosedBracketToken';
 import Translator from '../src/Translator';
-
-/*
-    '+': new AdditionToken('operator'),
-    '-': new SubtractionToken('operator'),
-    '*': new MultiplicationToken('operator'),
-    '/': new DivisionToken('operator'),
-    '(': new OpenBracketToken('openBracket'),
-    ')': new ClosedBracketToken('closedBracket'),
-*/
 
 test('Input tokens("(1*2+3)+4") in infix notation, get tokens("12*3+4+") in postfix notation', () => {
   const tokens = [

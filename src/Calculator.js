@@ -1,4 +1,4 @@
-import TokenBuilder from './lexal/TokenBuilder';
+import TokenBuilder from './TokenBuilder';
 import Translator from './Translator';
 
 export default class Calculator {

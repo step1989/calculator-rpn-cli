@@ -8,11 +8,6 @@ export default class Translator {
   translateToPostfixNotation() {
     this.tokens.forEach((token) => {
       token.processedTokenToPostfixNotation([this.outputQueue, this.operationsStack]);
-      console.log('Состояние стека и очереди вывода');
-      console.log('toke - ', token);
-      console.log('queue  - ', this.outputQueue);
-      console.log('oper  - ', this.operationsStack);
-      console.log('Конец вывода');
     });
     this.operationsStack.reverse().forEach((operationToken) => {
       this.outputQueue.push(operationToken);

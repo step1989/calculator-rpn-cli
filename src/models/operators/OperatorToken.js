@@ -13,15 +13,9 @@ export default class OperatorToken extends AbstractToken {
 
   processedTokenToPostfixNotation(args) {
     const [outputQueue, operationsStack] = args;
-    console.log('this processed - ', this);
-    console.log('outputQueue processed - ', outputQueue);
-    console.log('operationsStack processed - ', operationsStack);
     if (operationsStack.length !== 0) {
       let headToken = operationsStack[operationsStack.length - 1];
-      console.log('head processed  - ', headToken);
-
       while (headToken.getBindingPower() >= this.getBindingPower() && headToken.getType() !== 'openBracket') {
-        console.log('попали в замену !!!');
         outputQueue.push(operationsStack.pop());
         if (operationsStack.length === 0) {
           break;

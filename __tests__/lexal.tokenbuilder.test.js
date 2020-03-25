@@ -1,4 +1,4 @@
-import TokenBuilder from '../src/lexal/TokenBuilder';
+import TokenBuilder from '../src/TokenBuilder';
 
 test('check all tokens', () => {
   const expression = '(5 + 3) - 122 * 33.34 / 3';
