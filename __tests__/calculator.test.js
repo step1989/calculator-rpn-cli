@@ -13,9 +13,25 @@ const testData = [
   ['sin(100) / 10 - 20 *5 +10', -90.05063656411097, 'function expression'],
 ];
 
+const testDataError = [
+  ['sin() + 20 - 30', 'Проверьте выражение. Для одной из операций не хватает аргументов', 'Missing arguments'],
+  ['(5+5)+(5', 'Проверьте выражение. Отсутствует закрывающая скобка', 'Missing closing bracket'],
+  ['1/0', 'Обнаружено деление на ноль. Проверьте выражение', 'Division by zero'],
+  ['1@2', 'Введен не поддерживаемый символ - "@"', 'Unsupported the symbol'],
+  ['nis(20)', 'Введена не поддерживаемая операция - "nis"', 'Unsupported operation'],
+];
+
+
 describe.each(testData)('test expression', (expression, expected, description) => {
   test(`${description}`, () => {
     const received = new Calculator(expression).calculate();
     expect(received).toEqual(expected);
+  });
+});
+
+describe.each(testDataError)('test error', (expression, expected, description) => {
+  test(`${description}`, () => {
+    const received = () => new Calculator(expression).calculate();
+    expect(received).toThrow(expected);
   });
 });

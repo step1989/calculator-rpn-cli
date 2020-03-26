@@ -8,6 +8,9 @@ export default class DivisionToken extends BinaryOperatorToken {
   }
 
   calc(a, b) {
+    if (b === 0) {
+      throw new Error('Обнаружено деление на ноль. Проверьте выражение');
+    }
     return a / b;
   }
 }

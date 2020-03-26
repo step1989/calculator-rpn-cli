@@ -16,6 +16,9 @@ export default class Calculator {
       token.calculate(this.stack);
     });
     const [result] = this.stack;
+    if (Number.isNaN(result)) {
+      throw new Error('Проверьте выражение. Для одной из операций не хватает аргументов');
+    }
     return parseFloat(result);
   }
 }

@@ -44,6 +44,8 @@ export default class TokenBuilder {
         }
         const token = Mapper.getToken(el);
         this.tokens.push(token);
+      } else {
+        throw new Error(`Введен не поддерживаемый символ - "${el}"`);
       }
     });
     if (!this.bufferIsEmpty()) {

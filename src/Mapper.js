@@ -18,6 +18,10 @@ export default class Mapper {
   };
 
   static getToken(operation) {
-    return this.#mapping[operation];
+    const token = this.#mapping[operation];
+    if (token) {
+      return token;
+    }
+    throw new Error(`Введена не поддерживаемая операция - "${operation}"`);
   }
 }
