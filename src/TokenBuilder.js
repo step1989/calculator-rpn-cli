@@ -1,7 +1,7 @@
 import OperationsMapper from './mappers/OperationsMapper';
 import FunctionsMapper from './mappers/FunctionsMapper';
 import Character from './Character';
-import NumberToken from './models/NumberToken';
+import NumberToken from './tokens/NumberToken';
 
 export default class TokenBuilder {
   constructor(expression) {

@@ -1,8 +1,8 @@
-import NumberToken from '../src/models/NumberToken';
-import AdditionToken from '../src/models/operators/binary/AdditionToken';
-import MultiplicationToken from '../src/models/operators/binary/MultiplicationToken';
-import OpenBracketToken from '../src/models/operators/brackets/OpenBracketToken';
-import ClosedBracketToken from '../src/models/operators/brackets/ClosedBracketToken';
+import NumberToken from '../src/tokens/NumberToken';
+import AdditionToken from '../src/tokens/operators/binary/AdditionToken';
+import MultiplicationToken from '../src/tokens/operators/binary/MultiplicationToken';
+import OpenBracketToken from '../src/tokens/operators/brackets/OpenBracketToken';
+import ClosedBracketToken from '../src/tokens/operators/brackets/ClosedBracketToken';
 import Translator from '../src/Translator';
 
 test('Input tokens("(1*2+3)+4") in infix notation, get tokens("12*3+4+") in postfix notation', () => {
