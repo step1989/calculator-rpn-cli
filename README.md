@@ -1,6 +1,6 @@
 [![Node.js CI](https://github.com/step1989/calculator/workflows/Node.js%20CI/badge.svg)](https://github.com/step1989/calculator/actions)
-[![Maintainability](https://api.codeclimate.com/v1/badges/01d103841c31ffdb9ec2/maintainability)](https://codeclimate.com/github/step1989/calculator/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/01d103841c31ffdb9ec2/test_coverage)](https://codeclimate.com/github/step1989/calculator/test_coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/ff248ccc7148796becf8/maintainability)](https://codeclimate.com/github/step1989/calculator-rpn-cli/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/ff248ccc7148796becf8/test_coverage)](https://codeclimate.com/github/step1989/calculator-rpn-cli/test_coverage)
 
 # Калькулятор
 
