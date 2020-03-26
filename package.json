@@ -1,7 +1,7 @@
 {
-  "name": "newcalc",
+  "name": "calculator-rpn-cli-rsv",
   "version": "1.0.0",
-  "description": "calc",
+  "description": "calc rpn",
   "main": "index.js",
   "bin": {
     "calculator": "dist/bin/calculator.js"

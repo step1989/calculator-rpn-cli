@@ -1,5 +1,4 @@
-import OperationsMapper from './mappers/OperationsMapper';
-import FunctionsMapper from './mappers/FunctionsMapper';
+import Mapper from './Mapper';
 import Character from './Character';
 import NumberToken from './tokens/NumberToken';
 
@@ -8,10 +7,10 @@ export default class TokenBuilder {
     this.expression = expression;
     this.tokens = [];
     this.buffer = [];
-    this.flagType = null;
+    this.currentTypeInBuffer = null;
     this.mapper = {
       numbers: (value) => new NumberToken(value),
-      letters: (value) => FunctionsMapper.getToken(value),
+      letters: (value) => Mapper.getToken(value),
     };
   }
 
@@ -20,21 +19,21 @@ export default class TokenBuilder {
   }
 
   getValue() {
-    return this.flagType === 'numbers' ? Number(this.buffer.join('')) : this.buffer.join('');
+    return this.currentTypeInBuffer === 'numbers' ? Number(this.buffer.join('')) : this.buffer.join('');
   }
 
   getToken(value) {
-    return this.mapper[this.flagType](value);
+    return this.mapper[this.currentTypeInBuffer](value);
   }
 
   getTokens() {
     const expressionWithoutSpace = this.expression.split('').filter((symbol) => symbol !== ' ');
     expressionWithoutSpace.forEach((el) => {
       if (Character.isNumbers(el)) {
-        this.flagType = 'numbers';
+        this.currentTypeInBuffer = 'numbers';
         this.buffer.push(el);
       } else if (Character.isLetters(el)) {
-        this.flagType = 'letters';
+        this.currentTypeInBuffer = 'letters';
         this.buffer.push(el);
       } else if (Character.isOperator(el)) {
         if (!this.bufferIsEmpty()) {
@@ -43,7 +42,7 @@ export default class TokenBuilder {
           this.tokens.push(token);
           this.buffer = [];
         }
-        const token = OperationsMapper.getToken(el);
+        const token = Mapper.getToken(el);
         this.tokens.push(token);
       }
     });
