@@ -22,7 +22,7 @@ test('check sin tokens', () => {
   const expression = 'sin(55)';
   const received = new TokenBuilder(expression).getTokens();
   const expected = [
-    { test: null },
+    { bindingPower: 10 },
     { bindingPower: 0 },
     { value: 55 },
     { bindingPower: 0 },

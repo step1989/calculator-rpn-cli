@@ -1,6 +1,8 @@
+import SinusToken from '../models/operators/functions/prefixfunctions/SinusToken';
+
 export default class FunctionsMapper {
   static mapper = {
-    sin: { test: null },
+    sin: new SinusToken(),
   }
 
   static getToken(operation) {
