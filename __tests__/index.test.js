@@ -1,4 +1,4 @@
-import Calculator from '../src/Calculator';
+import getResult from '../src/index';
 
 const testData = [
   ['3', 3, 'simple test'],
@@ -24,14 +24,14 @@ const testDataError = [
 
 describe.each(testData)('test expression', (expression, expected, description) => {
   test(`${description}`, () => {
-    const received = new Calculator(expression).calculate();
+    const received = getResult(expression);
     expect(received).toEqual(expected);
   });
 });
 
 describe.each(testDataError)('test error', (expression, expected, description) => {
   test(`${description}`, () => {
-    const received = () => new Calculator(expression).calculate();
+    const received = () => getResult(expression);
     expect(received).toThrow(expected);
   });
 });
